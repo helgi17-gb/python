@@ -11,7 +11,8 @@ for el in count(10):
         break
     else:
         print(el)
-print(f"-")
+print("-"*20)
+
 print("Generator using cycle()")
 i = 0
 for el in cycle(['winter', 'spring', 'summer', 'autumn']):
