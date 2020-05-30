@@ -119,10 +119,11 @@ class Ticket:
         if index > 8: index = 8
         return index
 
+    def is_exists(self, number):
+        return number in list(self.matrix[0] + self.matrix[1] + self.matrix[2])
+
     def x_out(self, number, verbose = True):
-       if number not in list(self.matrix[0] + self.matrix[1] + self.matrix[2]):
-           if verbose: print("Такого числа нет на Вашей карточке")
-       else:
+       if self.is_exists(number):
            for row in range(3):
                if number in self.matrix[row]:
                    index = self.get_index(number)
@@ -150,6 +151,9 @@ class Game:
         while True:
             self.choice = input("Зачеркнуть цифру? (y/n)")
             if self.choice == 'y':
+                if not self.player_ticket.is_exists(p):
+                    print("Вы проиграли. Такого числа нет на Вашей карточке")
+                    raise StopIteration
                 self.player_ticket.x_out(p)
                 break
             elif self.choice == 'n':
